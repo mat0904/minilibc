@@ -1,11 +1,13 @@
 [BITS 64]
 
-global memset
+global memcpy
 
 section .text
-memset:
+memcpy:
     xor rcx, rcx
     cmp rdi, 0
+    je .null
+    cmp rsi, 0
     je .null
     jmp .set
 
@@ -16,7 +18,8 @@ memset:
 .set:
     cmp rcx, rdx
     je .end
-    mov [rdi + rcx], rsi
+    mov r8, [rsi + rcx]
+    mov [rdi + rcx], r8
     inc rcx
     jmp .set
 

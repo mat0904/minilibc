@@ -8,7 +8,10 @@
 MAIN_SRC	=	src/main.c
 
 ASM_SRC	=	src/strlen.asm \
-			src/strchr.asm
+			src/strchr.asm \
+			src/strrchr.asm \
+			src/memset.asm \
+			src/memcpy.asm
 
 TEST_SRC	=	tests/strlen.c \
 
@@ -34,7 +37,7 @@ TEST_EXE	=	$(EXE)_test
 all:	$(DLIB)
 
 %.o:	%.c
-		$(CC) -o $@ -c $< $(CFLAGS)
+		$(CC) -o $@ -c $< $(CFLAGS) -g3
 
 %.o	:	%.asm
 		$(NASM) -o $@ $< $(ASMFLAGS)

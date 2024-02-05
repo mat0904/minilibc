@@ -2,20 +2,30 @@
 
 global strrchr
 
-%include "strlen.asm"
+strlen:
+    xor rax, rax
+    cmp rdi, 0
+    je .done
+    jmp .count
+
+.count:
+    cmp byte[rdi + rax], 0
+    je .done
+    inc rax
+    jmp .count
+
+.done:
+    ret
 
 section .text
 strrchr:
     xor rax, rax
     cmp rdi, 0
     je .null
-    mov rax,
+    call strlen
     jmp .count
 
 .count:
-    push rax
-    call strlen
-    pop rax
     cmp rax, 0
     je .null
     cmp byte[rdi + rax], sil
