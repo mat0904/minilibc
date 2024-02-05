@@ -1,0 +1,5 @@
+binary
+binary_test
+*.o
+*.so
+main.c
