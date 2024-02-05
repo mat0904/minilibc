@@ -7,9 +7,10 @@
 
 MAIN_SRC	=	src/main.c
 
-ASM_SRC	=	src/strlen.asm
+ASM_SRC	=	src/strlen.asm \
+			src/strchr.asm
 
-TEST_SRC	=	tests/is_working.c \
+TEST_SRC	=	tests/strlen.c \
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 ASM_OBJ	=	$(ASM_SRC:.asm=.o)
@@ -18,10 +19,10 @@ TEST_OBJ	=	$(TEST_SRC:.c=_test.o)
 CC	=	gcc
 NASM	=	nasm
 
-ASMFLAGS	=	-f elf64
+ASMFLAGS	=	-f elf64 -g
 
 CFLAGS	= -Wall -Wextra
-LIB	=
+LIB	=	-L. -lasm
 LDFLAGS	=	$(LIB)
 
 COVERAGE	=	--coverage -lcriterion
@@ -64,8 +65,8 @@ re:	fclean all
 
 unit_tests:	CFLAGS += $(COVERAGE)
 unit_tests: LDFLAGS += $(COVERAGE)
-unit_tests: $(FILE_OBJ) $(TEST_OBJ)
-			$(CC) -o $(TEST_EXE) $^ $(LDFLAGS)
+unit_tests: $(DLIB) $(FILE_OBJ) $(TEST_OBJ)
+			$(CC) -o $(TEST_EXE) $(FILE_OBJ) $(TEST_OBJ) $(LDFLAGS) -L. -lasm
 
 tests_run:	clean unit_tests
 			./$(TEST_EXE)
