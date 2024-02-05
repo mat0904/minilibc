@@ -8,4 +8,5 @@
 #pragma once
 
 extern unsigned int strlen(const char *);
-extern char *mystrchr(const char *, int searchedChar);
+extern char *strchr(const char *, int searchedChar);
+extern char *strrchr(const char *, int searchedChar);

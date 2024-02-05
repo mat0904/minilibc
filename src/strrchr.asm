@@ -1,20 +1,26 @@
 [BITS 64]
 
-global strchr
+global strrchr
+
+%include "strlen.asm"
 
 section .text
-strchr:
+strrchr:
     xor rax, rax
     cmp rdi, 0
     je .null
+    mov rax,
     jmp .count
 
 .count:
-    cmp byte[rdi + rax], 0
+    push rax
+    call strlen
+    pop rax
+    cmp rax, 0
     je .null
     cmp byte[rdi + rax], sil
     je .done
-    inc rax
+    dec rax
     jmp .count
 
 .null:
