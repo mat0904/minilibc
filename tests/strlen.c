@@ -6,23 +6,38 @@
 */
 
 #include <criterion/criterion.h>
-#include <criterion/redirect.h>
-#include "../include/minilib.h"
+#include <dlfcn.h>
 
-void redirect_all_std(void)
+#define PROTO   unsigned int (*my_strlen)(char *)
+
+static void basic(PROTO)
 {
-    cr_redirect_stderr();
-    cr_redirect_stdout();
+    char test[] = "hello";
+    cr_assert_eq(my_strlen(test), strlen(test));
 }
 
-Test(strlen, basic, .init = redirect_all_std) {
-    cr_assert_eq(strlen("hello"), 5);
+static void empty(PROTO)
+{
+    char test[] = "";
+    cr_assert_eq(my_strlen(test), strlen(test));
 }
 
-Test(strlen, empty, .init = redirect_all_std) {
-    cr_assert_eq(strlen(""), 0);
+static void null(PROTO)
+{
+    char *test = NULL;
+    cr_assert_eq(my_strlen(test), 0);
 }
 
-Test(strlen, null, .init = redirect_all_std) {
-    cr_assert_eq(strlen(NULL), 0);
+Test(strlen, basic)
+{
+    void *handle = dlopen("./libasm.so", RTLD_LAZY);
+    if (!handle) {
+        return;
+    }
+    unsigned int (*my_strlen)(char*) = dlsym(handle, "strlen");
+    basic(my_strlen);
+    empty(my_strlen);
+    null(my_strlen);
+    dlclose(handle);
 }
+

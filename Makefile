@@ -11,9 +11,14 @@ ASM_SRC	=	src/strlen.asm \
 			src/strchr.asm \
 			src/strrchr.asm \
 			src/memset.asm \
-			src/memcpy.asm
+			src/memcpy.asm \
+			src/strcmp.asm \
+			src/memmove.asm
 
 TEST_SRC	=	tests/strlen.c \
+				tests/strchr.c \
+				tests/strrchr.c \
+				tests/memset.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 ASM_OBJ	=	$(ASM_SRC:.asm=.o)
@@ -24,7 +29,7 @@ NASM	=	nasm
 
 ASMFLAGS	=	-f elf64 -g
 
-CFLAGS	= -Wall -Wextra
+CFLAGS	=
 LIB	=	-L. -lasm
 LDFLAGS	=	$(LIB)
 

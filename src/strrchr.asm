@@ -27,7 +27,7 @@ strrchr:
 
 .count:
     cmp rax, 0
-    je .null
+    jl .null
     cmp byte[rdi + rax], sil
     je .done
     dec rax
