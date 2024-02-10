@@ -12,10 +12,9 @@
 
 static void basic(PROTO)
 {
-    char *test = malloc(5);
-    my_memset(test, 1, 5);
-    cr_assert_eq(test[1], 1);
-    free(test);
+    char test[10];
+    my_memset(test, 2, 10);
+    cr_assert_eq(test[1], 2);
 }
 
 Test(memset, basic)

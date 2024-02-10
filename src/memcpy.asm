@@ -18,8 +18,8 @@ memcpy:
 .set:
     cmp rcx, rdx
     je .end
-    mov r8, [rsi + rcx]
-    mov [rdi + rcx], r8
+    mov r8b, [rsi + rcx]
+    mov [rdi + rcx], r8b
     inc rcx
     jmp .set
 

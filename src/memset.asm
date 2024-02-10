@@ -16,7 +16,7 @@ memset:
 .set:
     cmp rcx, rdx
     je .end
-    mov [rdi + rcx], rsi
+    mov [rdi + rcx], sil
     inc rcx
     jmp .set
 

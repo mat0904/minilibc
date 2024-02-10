@@ -4,22 +4,35 @@ global memmove
 
 section .text
 memmove:
+    cmp rdi, rsi
+    je .end
+    jl .loopm
+    jg .revloopm
+
+.loopm:
     xor rcx, rcx
-    jmp .push
+    jmp .loop
 
-.push:
+.loop:
     cmp rcx, rdx
-    je .depush
-    push qword[rdi + rcx]
+    je .end
+    mov r8b, byte[rsi + rcx]
+    mov byte[rdi + rcx], r8b
     inc rcx
-    jmp .push
+    jmp .loop
 
-.depush:
-    cmp rcx, 0
+.revloopm:
+    mov rcx, rdx
     dec rcx
-    pop qword[rsi + rcx]
-    jmp .depush
-    jmp .end
+    jmp .revloop
+
+.revloop:
+    cmp rcx, 0
+    jl .end
+    mov r8b, byte[rsi + rcx]
+    mov byte[rdi + rcx], r8b
+    dec rcx
+    jmp .revloop
 
 .end:
     mov rax, rsi

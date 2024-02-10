@@ -18,7 +18,9 @@ ASM_SRC	=	src/strlen.asm \
 TEST_SRC	=	tests/strlen.c \
 				tests/strchr.c \
 				tests/strrchr.c \
-				tests/memset.c
+				tests/memset.c \
+				tests/memcpy.c \
+				tests/memmove.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 ASM_OBJ	=	$(ASM_SRC:.asm=.o)
@@ -51,7 +53,7 @@ all:	$(DLIB)
 			$(CC) -o $@ -c $<
 
 $(DLIB):	$(ASM_OBJ)
-			$(CC) -shared -o $@ $^
+			ld -shared -o $@ $^
 
 run:	$(DLIB) $(MAIN_OBJ)
 		$(CC) -o $(EXE) $(MAIN_OBJ) $(LDFLAGS) -L. -lasm
