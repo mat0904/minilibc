@@ -28,4 +28,5 @@ strrchr:
 .find:
     mov rax, rdi
     add rax, rcx
+    inc rcx
     jmp .count
