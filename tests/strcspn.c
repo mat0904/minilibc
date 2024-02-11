@@ -13,8 +13,8 @@
 
 static void basic(PROTO)
 {
-    printf("%ld\n", my_strcspn("hello", "o"));
-    printf("%ld\n", strcspn("hello", "o"));
+//    printf("%ld\n", my_strcspn("hello", "o"));
+//    printf("%ld\n", strcspn("hello", "o"));
     cr_assert_eq(my_strcspn("hello", "l"), 2);
     cr_assert_eq(my_strcspn("hello", "e"), 1);
 }
