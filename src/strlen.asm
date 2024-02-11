@@ -1,6 +1,6 @@
 [BITS 64]
 
-global strlen
+GLOBAL strlen
 
 section .text
 strlen:

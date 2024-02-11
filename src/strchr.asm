@@ -1,6 +1,6 @@
 [BITS 64]
 
-global strchr
+GLOBAL strchr
 
 section .text
 strchr:

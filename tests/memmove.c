@@ -21,15 +21,15 @@ static void basic(PROTO)
 static void overlap(PROTO)
 {
     char test[] = "hello world";
-    my_memmove(test, &test[5], 5);
-    cr_assert_str_eq(test, " worl world");
+    my_memmove(test, &test[6], 5);
+    cr_assert_str_eq(test, "world world");
 }
 
 static void overlap2(PROTO)
 {
     char test[] = "hello world";
-    my_memmove(&test[5], test, 5);
-    cr_assert_str_eq(test, "hellohellod");
+    my_memmove(&test[6], test, 5);
+    cr_assert_str_eq(test, "hello hello");
 }
 
 Test(memmove, basic)

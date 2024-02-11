@@ -20,6 +20,7 @@ TEST_SRC	=	tests/strlen.c \
 				tests/strrchr.c \
 				tests/memset.c \
 				tests/memcpy.c \
+				tests/strcmp.c \
 				tests/memmove.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
@@ -29,7 +30,7 @@ TEST_OBJ	=	$(TEST_SRC:.c=_test.o)
 CC	=	gcc
 NASM	=	nasm
 
-ASMFLAGS	=	-f elf64 -g
+ASMFLAGS	=	-f elf64
 
 CFLAGS	=
 LIB	=	-L. -lasm

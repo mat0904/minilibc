@@ -1,6 +1,6 @@
 [BITS 64]
 
-global memmove
+GLOBAL memmove:function
 
 section .text
 memmove:

@@ -1,10 +1,13 @@
 [BITS 64]
 
-global strcmp
+GLOBAL strcmp
 
 section .text
 strcmp:
-    xor rdx, rdx
+    cmp rdi, 0
+    je .null
+    cmp rsi, 0
+    je .null
     jmp .comp
 
 .comp:
@@ -26,5 +29,14 @@ strcmp:
     ret
 
 .end:
+    movzx r9, byte[rdi]
+    movzx r10, byte[rsi]
+    sub r9, r10
+    cmp r9, 0
+    jne .ret
+    mov rax, 0
+    ret
+
+.null:
     mov rax, 0
     ret

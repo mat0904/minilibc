@@ -1,6 +1,6 @@
 [BITS 64]
 
-global memcpy
+GLOBAL memcpy
 
 section .text
 memcpy:
