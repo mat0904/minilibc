@@ -15,7 +15,8 @@ ASM_SRC	=	src/strlen.asm \
 			src/strcmp.asm \
 			src/memmove.asm \
 			src/strncmp.asm \
-			src/strcasecmp.asm
+			src/strcasecmp.asm \
+			src/strpbrk.asm
 
 TEST_SRC	=	tests/strlen.c \
 				tests/strchr.c \
@@ -25,7 +26,8 @@ TEST_SRC	=	tests/strlen.c \
 				tests/strcmp.c \
 				tests/memmove.c \
 				tests/strncmp.c \
-				tests/strcasecmp.c
+				tests/strcasecmp.c \
+				tests/strpbrk.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 ASM_OBJ	=	$(ASM_SRC:.asm=.o)
