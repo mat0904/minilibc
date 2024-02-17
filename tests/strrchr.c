@@ -17,6 +17,7 @@ static void basic(PROTO)
     cr_assert_str_eq(my_strrchr(test, 'l'), strrchr(test, 'l'));
     cr_assert_str_eq(my_strrchr(test, 'h'), strrchr(test, 'h'));
     cr_assert_str_eq(my_strrchr(test, 'o'), strrchr(test, 'o'));
+    cr_assert_str_eq(my_strrchr(test, '\0'), strrchr(test, '\0'));
 }
 
 static void empty(PROTO)

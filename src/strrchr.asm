@@ -12,7 +12,7 @@ strrchr:
 
 .count:
     cmp byte[rdi + rcx], 0
-    je .ret
+    je .last
     cmp byte[rdi + rcx], sil
     je .find
     inc rcx
@@ -21,6 +21,12 @@ strrchr:
 .null:
     mov rax, 0
     ret
+
+.last:
+    inc rcx
+    cmp byte[rdi + rcx], sil
+    je .find
+    jne .ret
 
 .ret:
     ret

@@ -11,7 +11,7 @@ strchr:
 
 .count:
     cmp byte[rdi + rax], 0
-    je .null
+    je .last
     cmp byte[rdi + rax], sil
     je .done
     inc rax
@@ -20,6 +20,12 @@ strchr:
 .null:
     xor rax, rax
     ret
+
+.last:
+    inc rax
+    cmp byte[rdi + rax], sil
+    je .done
+    jne .null
 
 .done:
     add rax, rdi
