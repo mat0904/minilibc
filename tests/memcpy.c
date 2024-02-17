@@ -7,6 +7,8 @@
 
 #include <criterion/criterion.h>
 #include <dlfcn.h>
+#include <unistd.h>
+#include <stdio.h>
 
 #define PROTO   char* (*my_memcpy)(void *, void *, unsigned int)
 
@@ -35,6 +37,7 @@ Test(memcpy, basic)
     }
     PROTO = dlsym(handle, "memcpy");
     basic(my_memcpy);
+    crash(my_memcpy);
     dlclose(handle);
 }
 

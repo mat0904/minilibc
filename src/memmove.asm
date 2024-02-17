@@ -1,6 +1,6 @@
 [BITS 64]
 
-GLOBAL memmove:function
+GLOBAL memmove
 
 section .text
 memmove:
@@ -35,5 +35,5 @@ memmove:
     jmp .revloop
 
 .end:
-    mov rax, rsi
+    mov rax, rdi
     ret

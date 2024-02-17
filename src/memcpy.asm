@@ -4,24 +4,35 @@ GLOBAL memcpy
 
 section .text
 memcpy:
+    cmp rdi, rsi
+    je .end
+    jl .loopm
+    jg .revloopm
+
+.loopm:
     xor rcx, rcx
-    cmp rdi, 0
-    je .null
-    cmp rsi, 0
-    je .null
-    jmp .set
+    jmp .loop
 
-.null:
-    mov rax, 0
-    ret
-
-.set:
+.loop:
     cmp rcx, rdx
     je .end
-    mov r8b, [rsi + rcx]
-    mov [rdi + rcx], r8b
+    mov r8b, byte[rsi + rcx]
+    mov byte[rdi + rcx], r8b
     inc rcx
-    jmp .set
+    jmp .loop
+
+.revloopm:
+    mov rcx, rdx
+    dec rcx
+    jmp .revloop
+
+.revloop:
+    cmp rcx, 0
+    jl .end
+    mov r8b, byte[rsi + rcx]
+    mov byte[rdi + rcx], r8b
+    dec rcx
+    jmp .revloop
 
 .end:
     mov rax, rdi
