@@ -9,17 +9,49 @@ strstr:
     je .null
     cmp rsi, 0
     je .null
-    je .comp
+    jmp .comp
 
 .comp:
-;    cmp byte[rdi], byte[rsi]
- ;   je .compstr
+    cmp byte[rdi], 0
+    je .null
+    push rdi
+    push rsi
+    jmp .compstr
+
+.restcomp:
+    pop rsi
+    pop rdi
+    inc rdi
+    jmp .comp
 
 .compstr:
-;    cmp byte[rdi], byte[rsi]
+    cmp byte[rdi], 0
+    je .last
+    cmp byte[rsi], 0
+    je .ret
+    movzx r9, byte[rdi]
+    movzx r10, byte[rsi]
+    sub r9, r10
+    cmp r9, 0
+    jne .restcomp
     inc rdi
+    inc rsi
+    jmp .compstr
+
+.last:
+    movzx r9, byte[rdi]
+    movzx r10, byte[rsi]
+    sub r9, r10
+    cmp r9, 0
+    je .ret
+    jne .null
+
+.ret:
+    pop rdi
+    pop rdi
+    mov rax, rdi
+    ret
 
 .null:
     mov rax, 0
     ret
- .end:

@@ -9,20 +9,19 @@
 #include <dlfcn.h>
 #include <stdio.h>
 
-#define PROTO   int (*my_strstr)(char *, char *)
+#define PROTO   char* (*my_strstr)(char *, char *)
 
 static void basic(PROTO)
 {
     char haystack[] = "hello world";
     char needle[] = "wo";
-    printf("%s\n", strstr(haystack, needle));
-}
-
-static void basic_2(PROTO)
-{
-    char test[] = "hello";
-    char test2[] = "hello";
-    cr_assert_eq(my_strstr(test, test2), 0);
+    char needle2[] = "hello world";
+    char needle3[] = "d";
+    char needle4[] = "qsd";
+    cr_assert_str_eq(my_strstr(haystack, needle), strstr(haystack, needle));
+    cr_assert_str_eq(my_strstr(haystack, needle2), strstr(haystack, needle2));
+    cr_assert_str_eq(my_strstr(haystack, needle3), strstr(haystack, needle3));
+    cr_assert_null(my_strstr(haystack, needle4));
 }
 
 static void null(PROTO)
@@ -40,8 +39,7 @@ Test(strstr, basic)
     }
     PROTO = dlsym(handle, "strstr");
     basic(my_strstr);
-    //basic_2(my_strstr);
-    //null(my_strstr);
+    null(my_strstr);
     dlclose(handle);
 }
 
