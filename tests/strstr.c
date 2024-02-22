@@ -21,6 +21,8 @@ static void basic(PROTO)
     cr_assert_str_eq(my_strstr(haystack, needle), strstr(haystack, needle));
     cr_assert_str_eq(my_strstr(haystack, needle2), strstr(haystack, needle2));
     cr_assert_str_eq(my_strstr(haystack, needle3), strstr(haystack, needle3));
+    cr_assert_null(my_strstr("", "needle"));
+    cr_assert_null(strstr("", "needle"));
     cr_assert_null(my_strstr(haystack, needle4));
 }
 

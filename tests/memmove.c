@@ -41,7 +41,8 @@ static void overlap3(PROTO)
     char str[100] = "Hello, world!";
     char *ptr = str + 6;
 
-    memmove(str + 13, ptr, strlen(ptr) + 1);
+    my_memmove(str + 13, ptr, strlen(ptr) + 1);
+    cr_log_warn("%s", str);
 
     cr_assert_str_eq(str, "Hello, world! world!");
 }
@@ -59,4 +60,3 @@ Test(memmove, basic)
     overlap3(my_memmove);
     dlclose(handle);
 }
-
