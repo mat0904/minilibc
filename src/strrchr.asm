@@ -23,10 +23,14 @@ strrchr:
     ret
 
 .last:
-    inc rcx
     cmp byte[rdi + rcx], sil
-    je .find
+    je .findlast
     jne .ret
+
+.findlast:
+    mov rax, rdi
+    add rax, rcx
+    ret
 
 .ret:
     ret

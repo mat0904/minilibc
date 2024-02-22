@@ -14,12 +14,11 @@
 static void basic(PROTO)
 {
     char test[] = "hello";
-    cr_assert_str_eq(my_strrchr(test, 'l'), strrchr(test, 'l'));
-    cr_assert_str_eq(my_strrchr(test, 'h'), strrchr(test, 'h'));
-    cr_assert_str_eq(my_strrchr(test, 'o'), strrchr(test, 'o'));
-    cr_assert_str_eq(my_strrchr(test, 'l'), "lo");
+    cr_assert_eq(my_strrchr(test, 'l'), strrchr(test, 'l'));
+    cr_assert_eq(my_strrchr(test, 'h'), strrchr(test, 'h'));
+    cr_assert_eq(my_strrchr(test, 'o'), strrchr(test, 'o'));
     cr_assert_eq(my_strrchr(test, 'l'), test + 3);
-    cr_assert_str_eq(my_strrchr(test, '\0'), strrchr(test, '\0'));
+    cr_assert_eq(my_strrchr(test, '\0'), strrchr(test, '\0'));
 }
 
 static void empty(PROTO)
