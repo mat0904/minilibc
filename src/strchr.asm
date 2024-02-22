@@ -5,6 +5,7 @@ GLOBAL strchr
 section .text
 strchr:
     xor rax, rax
+    xor rcx, rcx
     cmp rdi, 0
     je .null
     jmp .count
@@ -22,10 +23,13 @@ strchr:
     ret
 
 .last:
-    inc rax
     cmp byte[rdi + rax], sil
     je .done
     jne .null
+
+.findlast:
+    add rax, rdi
+    ret
 
 .done:
     add rax, rdi

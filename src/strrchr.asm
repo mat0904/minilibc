@@ -19,7 +19,7 @@ strrchr:
     jmp .count
 
 .null:
-    mov rax, 0
+    xor rax, rax
     ret
 
 .last:
