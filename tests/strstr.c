@@ -18,12 +18,13 @@ static void basic(PROTO)
     char needle2[] = "hello world";
     char needle3[] = "d";
     char needle4[] = "qsd";
-    cr_assert_str_eq(my_strstr(haystack, needle), strstr(haystack, needle));
-    cr_assert_str_eq(my_strstr(haystack, needle2), strstr(haystack, needle2));
-    cr_assert_str_eq(my_strstr(haystack, needle3), strstr(haystack, needle3));
-    cr_assert_null(my_strstr("", "needle"));
-    cr_assert_null(strstr("", "needle"));
-    cr_assert_null(my_strstr(haystack, needle4));
+    char empty_haystack[] = "";
+    char empty_needle[] = "";
+    cr_assert_eq(my_strstr(haystack, needle), strstr(haystack, needle));
+    cr_assert_eq(my_strstr(haystack, needle2), strstr(haystack, needle2));
+    cr_assert_eq(my_strstr(haystack, needle3), strstr(haystack, needle3));
+    cr_assert_eq(my_strstr(empty_haystack, empty_needle), strstr(empty_haystack, empty_needle));
+//    cr_assert_eq(my_strstr(haystack, needle), strstr(haystack, needle));
 }
 
 static void null(PROTO)

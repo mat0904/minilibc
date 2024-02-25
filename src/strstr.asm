@@ -13,10 +13,21 @@ strstr:
 
 .comp:
     cmp byte[rdi], 0
-    je .null
+    je .checknull
     push rdi
     push rsi
     jmp .compstr
+
+.checknull:
+    movzx r9, byte[rdi]
+    movzx r10, byte[rsi]
+    sub r9, r10
+    je .retnull
+    jne .null
+
+.retnull:
+    mov rax, rdi
+    ret
 
 .restcomp:
     pop rsi
@@ -47,9 +58,8 @@ strstr:
     jne .null
 
 .ret:
-    pop rdi
-    pop rdi
-    mov rax, rdi
+    pop rsi
+    pop rax
     ret
 
 .null:
