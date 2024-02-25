@@ -20,7 +20,8 @@ ASM_SRC	=	src/strlen.asm \
 			src/strcspn.asm \
 			src/strstr.asm \
 			src/index.asm \
-			src/rindex.asm
+			src/rindex.asm \
+			src/memfrob.asm
 
 TEST_SRC	=	tests/strlen.c \
 				tests/strchr.c \
