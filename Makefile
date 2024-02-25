@@ -18,7 +18,9 @@ ASM_SRC	=	src/strlen.asm \
 			src/strcasecmp.asm \
 			src/strpbrk.asm \
 			src/strcspn.asm \
-			src/strstr.asm
+			src/strstr.asm \
+			src/index.asm \
+			src/rindex.asm
 
 TEST_SRC	=	tests/strlen.c \
 				tests/strchr.c \
